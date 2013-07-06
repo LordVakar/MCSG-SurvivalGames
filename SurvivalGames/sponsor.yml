@@ -1,9 +1,0 @@
-# This file has all the settings for sponsoring players.
-# As of right now, all you can do is define a list of items
-# and their prices. You define the item ID and the price like this:
-# items:
-#  1: 20
-# This makes the item with the ID of 1 be worth $20 each.
-items:
-  297: 10
-  

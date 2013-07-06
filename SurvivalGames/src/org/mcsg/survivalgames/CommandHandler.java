@@ -79,7 +79,7 @@ public class CommandHandler implements CommandExecutor {
 		commands.put("spectate", new Spectate());
 		commands.put("lq", new LeaveQueue());
 		commands.put("leavequeue", new LeaveQueue());
-		commands.put("list", new ListPlayers());
+		//commands.put("list", new ListPlayers());
 		commands.put("tp", new Teleport());
 		commands.put("reload", new Reload());
 
@@ -108,7 +108,7 @@ public class CommandHandler implements CommandExecutor {
 		helpinfo.put("spectate", 1);
 		helpinfo.put("lq", 1);
 		helpinfo.put("leavequeue", 1);
-		helpinfo.put("list", 1);
+		//helpinfo.put("list", 1);
 		helpinfo.put("tp", 2);
 		helpinfo.put("delwall", 3);
 		if (SurvivalGames.dbcon2) {

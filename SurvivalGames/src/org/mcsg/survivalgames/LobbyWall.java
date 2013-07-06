@@ -10,6 +10,7 @@ import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Sign;
 import org.bukkit.entity.Player;
+import org.mcsg.survivalgames.MessageManager.PrefixType;
 import org.mcsg.survivalgames.util.NameUtil;
 
 public class LobbyWall {
@@ -80,56 +81,61 @@ public class LobbyWall {
 		}
 		clear();
 		Game game = GameManager.getInstance().getGame(gameid);
-		Sign s0 = signs.get(0);
-		Sign s1 = signs.get(1);
+		if (game != null) {
+			Sign s0 = signs.get(0);
+			Sign s1 = signs.get(1);
 
-		// sign 0
-		s0.setLine(0, "[SurvivalGames]");
-		s0.setLine(1, "Click to join");
-		s0.setLine(2, "Arena " + gameid);
+			// sign 0
+			s0.setLine(0, "[SurvivalGames]");
+			s0.setLine(1, "Click to join");
+			s0.setLine(2, "Arena " + gameid);
 
-		// sign 1
-		s1.setLine(0, game.getName());
-		s1.setLine(1, game.getMode() + "");
-		s1.setLine(2, game.getActivePlayers() + "/" + ChatColor.GRAY + game.getInactivePlayers() + ChatColor.BLACK + "/"
-				+ SettingsManager.getInstance().getSpawnCount(game.getID()));
+			// sign 1
+			s1.setLine(0, game.getName());
+			s1.setLine(1, game.getMode() + "");
+			s1.setLine(2, game.getActivePlayers() + "/" + ChatColor.GRAY + game.getInactivePlayers() + ChatColor.BLACK + "/"
+					+ SettingsManager.getInstance().getSpawnCount(game.getID()));
 
-		// live update line s1
-		if (game.getMode() == Game.GameMode.STARTING) {
-			s1.setLine(3, game.getCountdownTime() + "");
-		} else if (game.getMode() == Game.GameMode.RESETING || game.getMode() == Game.GameMode.FINISHING) {
-			s1.setLine(3, game.getRBStatus());
-			if (game.getRBPercent() > 100) {
-				s1.setLine(1, "Saving Queue");
-				s1.setLine(3, (int) game.getRBPercent() + " left");
-			} else
-				s1.setLine(3, (int) game.getRBPercent() + "%");
-		} else {
-			s1.setLine(3, "");
-		}
-
-		// live player data
-		ArrayList<String> display = new ArrayList<String>();
-		for (Player p : game.getAllPlayers()) {
-			display.add((game.isPlayerActive(p) ? ChatColor.BLACK : ChatColor.GRAY)
-					+ NameUtil.stylize(p.getName(), true, !game.isPlayerActive(p)));
-		}
-
-		try {
-			int no = 2;
-			int line = 0;
-			for (String s : display) {
-				signs.get(no).setLine(line, s);
-				line++;
-				if (line >= 4) {
-					line = 0;
-					no++;
-				}
+			// live update line s1
+			if (game.getMode() == Game.GameMode.STARTING) {
+				s1.setLine(3, game.getCountdownTime() + "");
+			} else if (game.getMode() == Game.GameMode.RESETING || game.getMode() == Game.GameMode.FINISHING) {
+				s1.setLine(3, game.getRBStatus());
+				if (game.getRBPercent() > 100) {
+					s1.setLine(1, "Saving Queue");
+					s1.setLine(3, (int) game.getRBPercent() + " left");
+				} else
+					s1.setLine(3, (int) game.getRBPercent() + "%");
+			} else {
+				s1.setLine(3, "");
 			}
-		} catch (Exception e) {
-		}
-		for (Sign s : signs) {
-			s.update();
+
+			// live player data
+			ArrayList<String> display = new ArrayList<String>();
+			for (Player p : game.getAllPlayers()) {
+				display.add((game.isPlayerActive(p) ? ChatColor.BLACK : ChatColor.GRAY)
+						+ NameUtil.stylize(p.getName(), true, !game.isPlayerActive(p)));
+			}
+
+			try {
+				int no = 2;
+				int line = 0;
+				for (String s : display) {
+					signs.get(no).setLine(line, s);
+					line++;
+					if (line >= 4) {
+						line = 0;
+						no++;
+					}
+				}
+			} catch (Exception e) {
+			}
+			for (Sign s : signs) {
+				s.update();
+			}
+		} else {
+			MessageManager.getInstance().sendFMessage(PrefixType.ERROR, "error.gamedoesntexist", Bukkit.getConsoleSender(),
+					"arena-" + gameid);
 		}
 	}
 

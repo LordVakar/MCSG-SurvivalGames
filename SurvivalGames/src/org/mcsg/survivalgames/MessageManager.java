@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.mcsg.survivalgames.util.MessageUtil;
@@ -47,7 +48,7 @@ public class MessageManager {
 	 * @param player
 	 * @param vars
 	 */
-	public void sendFMessage(PrefixType type, String input, Player player, String... args) {
+	public void sendFMessage(PrefixType type, String input, CommandSender player, String... args) {
 		String msg = SettingsManager.getInstance().getMessageConfig().getString("messages." + input);
 		boolean enabled = SettingsManager.getInstance().getMessageConfig().getBoolean("messages." + input + "_enabled", true);
 		if (msg == null)

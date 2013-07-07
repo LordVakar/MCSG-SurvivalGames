@@ -15,6 +15,7 @@ import org.mcsg.survivalgames.MessageManager.PrefixType;
 import org.mcsg.survivalgames.commands.AddHead;
 import org.mcsg.survivalgames.commands.AddSign;
 import org.mcsg.survivalgames.commands.AddWall;
+import org.mcsg.survivalgames.commands.Arenas;
 import org.mcsg.survivalgames.commands.CreateArena;
 import org.mcsg.survivalgames.commands.DelArena;
 import org.mcsg.survivalgames.commands.DelHead;
@@ -63,6 +64,7 @@ public class CommandHandler implements CommandExecutor {
 		}
 		commands.put("createarena", new CreateArena());
 		commands.put("join", new Join());
+		commands.put("arenas", new Arenas());
 		commands.put("addwall", new AddWall());
 		commands.put("setspawn", new SetSpawn());
 		commands.put("getcount", new ListArenas());
@@ -108,6 +110,7 @@ public class CommandHandler implements CommandExecutor {
 		helpinfo.put("spectate", 1);
 		helpinfo.put("lq", 1);
 		helpinfo.put("leavequeue", 1);
+		helpinfo.put("arenas", 3);
 		//helpinfo.put("list", 1);
 		helpinfo.put("tp", 2);
 		helpinfo.put("delwall", 3);

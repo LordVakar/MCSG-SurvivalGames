@@ -1,5 +1,7 @@
 package org.mcsg.survivalgames.commands;
 
+import java.io.IOException;
+
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 import org.mcsg.survivalgames.Game;
@@ -8,6 +10,7 @@ import org.mcsg.survivalgames.LobbyManager;
 import org.mcsg.survivalgames.MessageManager;
 import org.mcsg.survivalgames.SettingsManager;
 import org.mcsg.survivalgames.MessageManager.PrefixType;
+import org.mcsg.survivalgames.SurvivalGames;
 
 public class DelArena implements SubCommand {
 
@@ -36,6 +39,11 @@ public class DelArena implements SubCommand {
 		g.disable();
 		s.set("sg-system.arenas." + arena + ".enabled", false);
 		s.set("sg-system.arenano", s.getInt("sg-system.arenano") - 1);
+		try {
+			s.save(s.getCurrentPath());
+		} catch (IOException e) {
+			SurvivalGames.logger.warning("Unable to save System YML on arena deletion.");
+		}
 		// spawn.set("spawns."+arena, null);
 		MessageManager.getInstance().sendFMessage(PrefixType.INFO, "info.deleted", player, "input-Arena");
 		SettingsManager.getInstance().saveSystemConfig();

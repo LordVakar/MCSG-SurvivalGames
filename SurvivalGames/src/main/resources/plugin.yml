@@ -19,6 +19,7 @@ permissions:
     default: true
     description: SurvivalGames Player Commands
     children:
+      sg.player.arenas: true
       sg.player.play: true
       sg.player.vote: true
       sg.player.spectate: true
@@ -26,6 +27,9 @@ permissions:
       sg.player.sponsor: true
       sg.player.listarenas: true
       sg.player.list: true
+  sg.player.arenas:
+    description: Allows the user to list arenas.
+    default: true
   sg.player.play:
     description: Allows the user to click a sign to join a game.
     default: true

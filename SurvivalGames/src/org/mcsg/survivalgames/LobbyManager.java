@@ -92,6 +92,7 @@ public class LobbyManager {
 	public void updateWall(int a) {
 		if (signs.get(a) != null) {
 			for (LobbyWall lw : signs.get(a)) {
+				System.out.println("Updating!");
 				lw.update();
 			}
 		}

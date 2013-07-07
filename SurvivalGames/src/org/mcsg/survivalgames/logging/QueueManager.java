@@ -58,6 +58,7 @@ public class QueueManager {
 		}
 		ArrayList<Entity> removelist = new ArrayList<Entity>();
 
+		if (SettingsManager.getGameWorld(id) == null) { return; }
 		for (Entity e : SettingsManager.getGameWorld(id).getEntities()) {
 			if ((!(e instanceof Player)) && (!(e instanceof HumanEntity))) {
 				if (GameManager.getInstance().getBlockGameId(e.getLocation()) == id) {

@@ -36,7 +36,7 @@ public class LobbyWall {
 					LobbyManager.lobbychunks.add(b.getChunk());
 					SurvivalGames.debug("usingx - " + b.getLocation().toString());
 				} else {
-					SurvivalGames.debug("Not a sign" + b.getType().toString());
+					SurvivalGames.debug("Tabela degil" + b.getType().toString());
 					return false;
 				}
 			}
@@ -50,7 +50,7 @@ public class LobbyWall {
 					LobbyManager.lobbychunks.add(b.getChunk());
 					SurvivalGames.debug("notx - " + b.getLocation().toString());
 				} else {
-					SurvivalGames.debug("Not a sign" + b.getType().toString());
+					SurvivalGames.debug("Tabela degil" + b.getType().toString());
 					return false;
 				}
 			}
@@ -59,10 +59,10 @@ public class LobbyWall {
 		if (dir == 3 || dir == 5) {
 			Collections.reverse(signs);
 		}
-		addMsg("SurvivalGames");
+		addMsg("Aclik Oyunlari");
 		addMsg("Double0negative");
-		addMsg("mc-sg.org");
-		addMsg("Game id: " + gameid);
+		addMsg("Dogukan Ayteki");
+		addMsg("Oyun no: " + gameid);
 		update();
 		return true;
 	}
@@ -86,8 +86,8 @@ public class LobbyWall {
 			Sign s1 = signs.get(1);
 
 			// sign 0
-			s0.setLine(0, "[SurvivalGames]");
-			s0.setLine(1, "Click to join");
+			s0.setLine(0, "[AclikOyunlari]");
+			s0.setLine(1, "Tikla Gir");
 			s0.setLine(2, "Arena " + gameid);
 
 			// sign 1
@@ -102,7 +102,7 @@ public class LobbyWall {
 			} else if (game.getMode() == Game.GameMode.RESETING || game.getMode() == Game.GameMode.FINISHING) {
 				s1.setLine(3, game.getRBStatus());
 				if (game.getRBPercent() > 100) {
-					s1.setLine(1, "Saving Queue");
+					s1.setLine(1, "Kuyruk Kaydediliyor");
 					s1.setLine(3, (int) game.getRBPercent() + " left");
 				} else
 					s1.setLine(3, (int) game.getRBPercent() + "%");
